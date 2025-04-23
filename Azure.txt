@@ -1,0 +1,75 @@
+22-04-2025
+
+
+PaaS - Referred to platform as a service, 
+
+NFR - Non Functional Requirement -  refer to the characteristics of a software system that are not related to specific functionality or behavior. They describe how the system should perform, rather than what it should do. 
+
+Example of NFR - Performance, Availability and Reliability, Security , Scalability, Maintainability
+
+-> Strategy is a long term plan while tactics is short term plan to achieve a particular goal.
+
+SaaS - (Software as a Service)
+*Key characteristic
+->Web based access
+-> Centralized hosting 
+
+Benefits of SaaS
+-> Lower upfront costs
+-> reduced IT overhead
+-> faster implementation 
+-> automatic updates and maintenance 
+-> scalability and flexibility 
+-> Accessibility 
+
+Deployment Model
+-> Public 
+-> Private 
+-> Hybrid
+
+Region
+-> An Azure region consists of one or more datacenters, connected by a high-capacity, fault-tolerant, low-latency network connection. Azure datacenters are typically located within a large metropolitan area.
+
+Availability zones
+-> Many Azure regions provide availability zones. Availability zones are independent sets of datacenters that contain isolated power, cooling, and network connections.
+
+
+*What is Azure Virtual Network?
+-> Azure Virtual Network is a service that provides the fundamental building block for your private network in Azure.
+
+Private IP Addressing: VNets use private IP addresses for internal communication between resources, helping to ensure security.
+
+Communication Between Resources: Resources within the same VNet can communicate with each other using their private IP addresses.
+
+Subnetting: A VNet can be divided into multiple subnets to isolate different resources or to implement different levels of security.
+
+Peering: VNets can be connected to other VNets within the same region or across regions using VNet Peering.
+
+VPN Gateways: You can connect your VNet to on-premises networks through a VPN gateway or an ExpressRoute connection for hybrid cloud scenarios.
+
+Bastion host
+-> A bastion host (also known as a jump host or jump server) is a special-purpose server used to provide secure access to private networks or internal infrastructure (like servers, databases, or internal web apps) from an external network (like the public internet). It acts as a gatekeeper, allowing administrators or users to connect to internal systems without exposing those systems directly to the outside world.
+
+What Is a Bastion Host?
+
+-> It's the only point of entry into a secured environment.
+
+-> All traffic to internal servers must pass through the bastion.
+
+-> It's placed in a public subnet (accessible via SSH or RDP), while the internal resources remain in a private subnet (not directly accessible from the internet).
+
+Scale set
+-> In Azure, a scale set is a service that allows you to deploy and manage a group of identical, load-balanced virtual machines (VMs). Scale sets enable you to automatically increase or decrease the number of VMs in response to demand or a defined schedule, providing high availability and scalability for your applications.
+
+Steps to connect to Azure VM 
+
+1) Open the azure Cloud shell 
+
+2) Change the permission of file to read-only using chmod 400 key.pem
+
+3) command to connect -> ssh -i key.pem azureuser@<public_ip>
+,ssh -i prabhakar-vm01_key.pem azureuser@4.247.27.62
+
+
+
+
