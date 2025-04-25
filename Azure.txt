@@ -94,6 +94,52 @@ Second Range	10.0.0.65-10.0.0.126	10.0.0.64		10.0.0.127		10.0.0.64/26
 
 Third Range	10.0.0.129-10.0.0.190	10.0.0.128		10.0.0.191		10.0.0.128/26
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+24-04-2025
+
+Creating a new User in Azure
+-> Go to Microsoft Entra ID -> manage -> users -> Create new User
+
+
+Assign a predefined Azure role (like Owner, Contributor, Reader, etc.) to a user or group, giving them specific permissions to manage or access resources within the selected subscription
+-> Subscription -> MML ->Access Control (IAM) -> Add role Assignment 
+
+
+Changing Quota
+Quota -> Settings -> My Quota
+Click on resources for which we need to increase the quota -> New Quota Request -> Enter a new limit -> Submit
+
+Benefits of Public Cloud
+->cost efficiency 
+-> scalability and flexibility
+-> global reach 
+-> focus on core business
+-> Sustainability 
+
+Challenges of Public Cloud 
+-> security concerns 
+-> vendor lock-in 
+
+
+az vm create \
+
+ --resource-group <resource_group_name> \
+
+ --name <vm_name> \
+
+ --location <location> \
+
+ --image <vm_image> \
+
+ --vnet-name <vnet_name> \
+
+ --subnet <subnet_name> \
+
+ --admin-username <admin_username> \
+
+ --admin-password <admin_password>
+
 
 
 
