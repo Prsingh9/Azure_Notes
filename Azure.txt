@@ -316,6 +316,75 @@ Description: Same as Command #46, but provides the name and resource group in a 
 49. az storage account list
 Description: Lists all storage accounts in the current subscription.
 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+26-04-2025
+
+Managed Identities in Azure are a way to securely authenticate your applications or services (like a runbook, virtual machine, or Azure app) to access other Azure resources without needing to store any credentials (like username/password or secrets).
+
+Two Types of Managed Identities:
+
+->System-assigned Managed Identity: This identity is tied to the lifecycle of a specific Azure resource. When the resource is deleted, the managed identity is also automatically deleted.
+
+->User-assigned Managed Identity: This identity is separate from the lifecycle of any specific resource. It can be assigned to multiple resources and managed independently.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+27-04-2025
+
+IaC -Infrastructure as Code
+
+It is used for :
+-> Consistency 
+-> Speed
+-> Automation 
+-> Reusability 
+-> Scalability 
+-> Version Control 
+
+Three forms of IaC
+
+1) configuration management tools 
+-> puppet
+-> chef
+-> Ansible 
+
+2) server templating -> vagrant and docker 
+
+3) Infrastructure Provisioning Tools
+-> Azure( ARM Template , BICEP)
+-> Terraform (Multi-cloud)
+-> AWS (Boto, cloud formation)
+
+-> HashiCorp Configuration Language (HCL) is the configuration language used in Terraform to define infrastructure as code.
+
+-> .terraform folder has all modules associated with provider.
+->The lock file in Terraform(.terraform.lock.hcl) is used to ensure that the exact versions of providers used in your Terraform configuration are locked down and consistent across different environments and machines.
+
+-> terraform plan:The terraform plan command is used in Terraform to create an execution plan, which shows what actions Terraform will take to change your infrastructure based on the current state and the desired state defined in your Terraform configuration files.
+
++: A resource will be created.
+
+-: A resource will be destroyed.
+
+~: A resource will be modified (updated).
+
+-> Use -out Flag to Save the Plan: You can save the plan to a file and apply it later:
+
+terraform plan -out=tfplan
+terraform apply tfplan
+
+main.tf - what we want to now do 
+.tf state file - last time what was done 
+azure cloud - Whatever we did directly in cloud 
+
+Terraform compares between all the three 
+
+-> terraform fmt: format 
+-> terraform destroy 
+-> terraform validate: to see the validation of format
+
+
 
 
 
