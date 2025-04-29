@@ -99,7 +99,6 @@ ssh -i prabhakar-vm01_key.pem azureuser@4.247.27.62
 ## VNet Scope
 - **Vnets are region scoped.**
 
----
 
 ## Subnetting
 
