@@ -369,5 +369,58 @@ You can save the plan to a file and apply it later:
 terraform plan -out=tfplan
 terraform apply tfplan
 ```
+- **main.tf** - what we want to now do 
+- **.tf state file** - last time what was done 
+- **azure cloud** - Whatever we did directly in cloud 
+
+- Terraform compares between all the three 
+
+```bash
+terraform fmt: format 
+terraform destroy 
+terraform validate: to see the validation of format
+```
 
 ---
+
+**30-04-2025**
+
+# CI/CD using Terraform 
+- Using Terraform for CI/CD involves leveraging Terraform to automate the infrastructure setup that supports CI/CD pipelines.
+
+- **required_provider :** Here we can manage the version of the provider.
+
+```bash
+terraform {
+    required_providers {
+        azurerm= {
+            source="hashicorp/azurerm"
+            version="2.40.0"
+        }
+    }
+}
+```
+
+| Change Type    | Example                                    | SemVer Example     |
+|----------------|--------------------------------------------|--------------------|
+| **Major**      | Redesigning a product or interface         | `1.0.0` → `2.0.0`  |
+| **Minor**      | Adding new features or enhancements        | `1.0.0` → `1.1.0`  |
+| **Patch**      | Fixing bugs or improving performance       | `1.0.0` → `1.0.1`  |
+
+
+- To make provider version greater than 2.0
+
+```bash
+provider "azurerm" {
+  version = ">2.0"
+}
+```
+
+
+![alt text](image.png)
+
+- **resource** in terraform is used to create 
+- **data** is used to query on existing resources
+
+![alt text](image-1.png)
+
