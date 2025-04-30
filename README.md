@@ -99,7 +99,6 @@ ssh -i prabhakar-vm01_key.pem azureuser@4.247.27.62
 ## VNet Scope
 - **Vnets are region scoped.**
 
----
 
 ## Subnetting
 
@@ -416,11 +415,8 @@ provider "azurerm" {
 }
 ```
 
-
-![alt text](image.png)
-
 - **resource** in terraform is used to create 
 - **data** is used to query on existing resources
 
-![alt text](image-1.png)
 
+---
