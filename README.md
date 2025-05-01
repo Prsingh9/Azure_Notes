@@ -414,9 +414,16 @@ provider "azurerm" {
   version = ">2.0"
 }
 ```
+![alt text](/images/image.png)
 
 - **resource** in terraform is used to create 
 - **data** is used to query on existing resources
 
+![alt text](/images/image-1.png)
+
+- VM02 will be created after VM01 is created successfully.
+```bash
+depends_on =[azurerm_linux_virtual_machine.prab-linuxVM01]
+```
 
 ---
