@@ -1,4 +1,4 @@
-#azure terraform script to create two VMs, VM02 creation will be followed by creation of VM01
+#azure terraform script to create two VMs in parallel 
 
 provider "azurerm" {
   features {}
@@ -118,6 +118,4 @@ resource "azurerm_linux_virtual_machine" "prab-linuxVM02" {
     sku       = "22_04-lts"
     version   = "latest"
   }
-
-  depends_on =[azurerm_linux_virtual_machine.prab-linuxVM01]
 }
