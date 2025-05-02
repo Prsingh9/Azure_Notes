@@ -427,3 +427,33 @@ depends_on =[azurerm_linux_virtual_machine.prab-linuxVM01]
 ```
 
 ---
+
+**02-05-2025**
+
+## Storage Account
+
+- A Storage Account in Azure is a service provided to store data in the cloud securely and at scale. It's used for storing a variety of data types such as blobs (binary large objects), files, queues, tables, and disks.
+
+**Key Types of Azure Storage**
+- **Blob Storage** – For storing unstructured data like images, videos, and documents.
+
+- **File Storage (Azure Files)** – Managed file shares for cloud or on-premises deployments.
+
+- **Queue Storage** – Message storage for reliable messaging between application components.
+
+- **Table Storage** – NoSQL key-value store for structured data.
+
+- **Disk Storage** – Used for virtual machine disks, including OS and data disks
+
+- Partition Key is a key concept that determines how your data is logically grouped and physically distributed for performance and scalability.
+
+- PartitionKey + RowKey form a unique identifier for an entity.
+
+![alt text](/images/image-2.png)
+
+![alt text](/images/image-3.png)
+
+![alt text](/images/image-4.png)
+
+
+

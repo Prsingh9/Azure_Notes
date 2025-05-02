@@ -67,7 +67,7 @@ resource "azurerm_linux_virtual_machine" "prab-linuxVM01" {
   name                = "prab-linuxVM01"
   resource_group_name = azurerm_resource_group.prab-rg01.name
   location            = "Central India"
-  size                = "Standard_F2"
+  size                = "Standard_B2s"
   admin_username      = "user18"
   network_interface_ids = [
     azurerm_network_interface.prab-nic.id
