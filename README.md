@@ -455,5 +455,29 @@ depends_on =[azurerm_linux_virtual_machine.prab-linuxVM01]
 
 ![alt text](/images/image-4.png)
 
+**Mount an Azure File Share to an Ubuntu Virtual Machine using Terraform**
+```bash
+- azurerm_linux_virtual_machine         → Creates the Ubuntu VM
+- azurerm_storage_account               → Creates a general-purpose v2 storage account
+- azurerm_storage_share                 → Creates an Azure File Share in the storage account
+- azurerm_network_interface, NSG, IP    → Networking resources including SSH access (port 22)
+```
+- Run the terraform script to create the storage account and VM.
 
+- Navigated to Storage Account > File Shares in Azure Portal
+
+- Created a File Share (e.g., prab-fileshare)
+
+- Uploaded an image (kitten.png) through the browser
+![alt text](images/image-5.png)
+
+- Clicked the File Share → Connect → Selected Linux → Copied the recommended mounting script
+![alt text](images/image-6.png)
+![alt text](images/image-7.png)
+
+- SSH’d into the VM using the public IP
+![alt text](images/image-8.png)
+
+- Ran the script on the VM to mount the Azure File Share
+![alt text](images/image-9.png)
 
