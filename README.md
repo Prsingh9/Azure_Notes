@@ -486,3 +486,21 @@ depends_on =[azurerm_linux_virtual_machine.prab-linuxVM01]
 
 ![alt text](images/image-9.png)
 
+--- 
+**03-05-2025**
+
+## Creating a Scale Set and attaching Load Balancer (LB) to it.
+- Create a VM , SSH into the VM and install apache into it.
+- Capture the image of the VM 
+- Create a scale set using the VM image which was captured
+- Attach a LB to it.
+- Create a Virutal network and inside it public and private subnet.
+- The load balancer will have public ip .
+- Add the scale set to the private subnet 
+- Now in the browser paste the public ip of the laod balacer it will forward the traffic to one of the VM of backend pool.
+- Apache server will run now in browser.
+
+---
+**05-05-2025**
+
+

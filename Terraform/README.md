@@ -9,6 +9,7 @@ This folder contains multiple Terraform configuration files
 - `main3.tf`: Create two VMs in parallel.
 - `main4.tf`: Create Storage account and container(BLOB)
 - `main5.tf`: Create storage account file share
+- `main6.tf`: Create scale set and attach load balancer
 
 
 
