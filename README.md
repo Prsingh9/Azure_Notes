@@ -503,4 +503,20 @@ depends_on =[azurerm_linux_virtual_machine.prab-linuxVM01]
 ---
 **05-05-2025**
 
+export ARM_subscription_id -> in terminal
+
+---
+
+- Terrafom is local scoped
+
+**type of variables**
+- variables
+- locals
+- output
+
+---
+
+**07-05-2025**
+
+
 
