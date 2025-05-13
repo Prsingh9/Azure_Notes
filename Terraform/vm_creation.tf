@@ -47,19 +47,6 @@ resource "azurerm_network_interface" "prab-nic" {
   }
 }
 
-#network interface 2
-#network interface
-resource "azurerm_network_interface" "prab-nic02" {
-  name                = "prab-nic02"
-  location            = "Central India"
-  resource_group_name = azurerm_resource_group.prab-rg01.name
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.prab-subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
 
 #virtual machine 1
 resource "azurerm_linux_virtual_machine" "prab-linuxVM01" {

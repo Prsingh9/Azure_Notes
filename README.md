@@ -517,6 +517,352 @@ export ARM_subscription_id -> in terminal
 ---
 
 **07-05-2025**
+---
+
+**Related Functions**
+
+- **file** also reads the contents of a given file, but interprets the data as UTF-8 text and returns the result directly as a string, without any further encoding.
+- **base64decode** can decode a Base64 string representing bytes in UTF-8, but in practice base64decode(filebase64(...)) is equivalent to the shorter expression file(...).
+
+- When specifying a file, use data = filebase64("path/to/file") to encode the contents of that file.
+
+```bash
+> filebase64("${path.module}/hello.txt")
+SGVsbG8gV29ybGQ=
+```
+
+- **custom_data** - (Optional) The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
+
+```bash 
+custom_data = filebase64("install_jenkins.sh") 
+```
+
+## Security in Cloud 
+- **Defence at depth**
+- **Layered Security**
+
+- conditional access policy looks into conditions for authentication to authorization.
+
+- **stateless** - refers to a system or application that does not retain any memory of previous interactions or states. 
+
+**3 axis of scalability**
+
+- An API Gateway is a server that acts as an entry point into a backend system, managing and routing requests from clients to various microservices or backend services.
+
+- Logging is the process of capturing, storing, and analyzing system or application events to monitor behavior, troubleshoot issues, and ensure performance and security.
+
+---
+**Precedence**
+- -var >> variable in .tfvars >> export TF_VAR_<variable_name>=value (environment variable) >> main.tf variable
+
+---
+10-05-2025
+
+## Azure Kubernetes Services (AKS)
+
+**Docker**
+- Images are layered file system , read only .
+- It is layered of folders .
+- Each line from docker file becomes a file, created in /var/lib/docker which is the root directory
+- docker info command 
+- images are stored in `overlay2` (default storage driver)
+- Any configuration changes in docker can be done via `deamon.json`
+- The images are stored as layers , proportionate to the number of lines in the docker line.
+- If multiple docker file are present and in some docker file code is already present , tag is created from already present code and on top of it new changes i.e layers are added.
+When a container is created from an image, Docker adds a writable container layer on top of the read-only image layers.
+- Writable layers of container (/var/lib/container) , every container which is running or stopped is present inside 
+container folder.
+
+- when we install docker , client(works like UI, between user and daemon) and daemon(background process)- running in background also get installed.
+
+- Clients talks with daemon using REST API.
+- Clients converts requests into https like requests and forward it .
+
+```bash 
+docker pull ngnix 
+docker image inspect ngnix
+```
+
+- running containers keep referring the images
+- container are ephemreral( can be destroyed anytime) as no process is inside continer.
+
+ - Cgroups
+ - Namespace
+
+**There are 6 namespaces:**
+- Hostname 
+- Filesystem
+- Network 
+- Process
+- Interprocess communication 
+- User
+
+- All containers are in pseudo isolation , they run on same machine yet don't interact with each other.
+
+- COW - Copy On Write
+
+-> When a container is created, it loads the system files to the memory, this process is very fast as only the essential files are loaded into memory. One issue arises when another process comes into the system and requires another file which hasn't been loaded. To deal with this, the daemon searches for the files in each layer till it finds the file and loads it into memory, this process is called CopyOnWrite(COW). This process might take a long time if there are multiple layers. To deal with this issue, we can reduce the number of layers, one such process is called Multi-Layer_Builds.
+
+**Docker Volume**
+- docker Volume are a way to persist the data when container crashes
+- `-v` in Docker: Volume Mounting
+
+-> Docker containers are ephemeral and if you want to persist the data then you have to attach a volume.
+
+-> Create a volume: docker run -it -v /home/kp/test:/home/myvolume ubuntu bash
+
+-> docker stop and docker kill are 2 ways to stop a container, stop is a graceful way while kill is a brute force method to stop a container.
+
+-> We can attach this volume to multiple containers and they can communicate with each other.
+
+-> Is accessible on the host machine too.
+
+# Docker Networking
+-> Every machine has an eth0, both host machine and containers. eth0 is the default network interface name for the first Ethernet device on a Linux system, used to handle network communication.
+
+-> docker0 is the default virtual bridge network interface created by Docker to allow communication between containers and the host.
+
+-> Docker creates the docker0 bridge (usually 172.17.0.1) and uses iptables to route traffic between containers (in 172.17.0.0/16 subnet) and the host or external networks. The request is sent by the eth0 of the host to docker0 which will then forward the request to the appropriate container.
+
+-> Whenever we create a new container, it will automatically create a new network device with all the appropriate connections and devices, like eth0
+
+-> Can be viewed in the host machine using ip a.
+
+-> A container will have its IP address assigned according to the IP Table and this IP will be used as the container's eth0.
+
+-> We can create a new network interface to communicate between the containers, isolated from the host network. This interface will have a different subnet range(172.18.0.0/16) and any container attached to this interface will have a different IP.
+
+-> Usually, the containers connected to different networks can't communicate. We can use the command docker network connect mynetwork <containerID> to connect the container to mynetwork. This will result in the container obtaining 2 IP Addresses, one in each subnet. Now the container can communicate with containers in both network, using the specific IP Address belonging to that network.
+
+**Different Type of Persistent**
+- `TempFS` - It stores the data in the memory (Container gone memory is also gone).
+- `Bind Mount` - Attach any location from host machine to container .
+- `-v` where_on_host:contianer(mandatory):access 
+- docker volume create myvolume 
+- -v myvol 
+
+- `Anonymouse Volume`: When only mandatory container path is given the anonymous volume is created inside `/var/lib/docker/volumes`.
+---
+**12-05-2025**
+# Kubernetes
+-> Scheduler, Controller, API Server and ETCD.
+
+-> ETCD is a No-SQL database and stores key-value pair.
+
+-> ETCD is the only persistent storage on the Master
+
+-> The other components are non-persistent and hence easier to scale.
+
+```bash 
+->API Server: Authenticate, authorize, validate and communicate. Authentication is done by checking the user certificates by the kubectl who makes a REST API request.
+
+->Scheduler: Its job is to find out which node is the best one to run a pod.
+
+-> Controller: Manages the state.
+```
+
+## Services in Kubernetes
+- Cluster IP
+- Node Port 
+- Load Balancer
+- External IP
+
+
+- Load balancer does service discovery.
+
+---
+**13-05-2025**
+
+## 🔐 1. Symmetric Encryption
+**Definition:** Uses the same key for both encryption and decryption.
+
+**Examples:** AES, DES, RC4
+
+**Pros:**
+
+Fast and efficient for large amounts of data.
+
+Less computational power needed.
+
+**Cons / Drawbacks:**
+
+Key distribution problem: Both sender and receiver must have the same secret key.
+
+If the key is intercepted, the data is compromised.
+
+**🔐 2. Asymmetric Encryption**
+**Definition:** Uses a pair of keys – public key (encrypt) and private key (decrypt).
+
+**Examples:** RSA, ECC
+
+**Pros:**
+
+No need to share a secret key.
+
+Enables secure communication over insecure channels.
+
+**Cons / Drawbacks:**
+
+Slower than symmetric encryption.
+
+More resource-intensive (CPU/memory).
+
+**📄 3. Certificate**
+**Definition:** A digital certificate is an electronic document used to prove ownership of a public key.
+
+**Contains:**
+
+- Public key
+
+- Identity of the owner
+
+- Issuer (Certificate Authority)
+
+- Expiration date
+
+## Digital signature
+
+**Purpose:**
+
+-> Helps verify that a public key belongs to the correct individual or organization.
+
+-> Common in HTTPS (SSL/TLS).
+
+## 🏛️ 4. Certificate Authority (CA)
+**Definition:** A trusted organization that issues digital certificates.
+
+**Examples:** Let’s Encrypt, DigiCert, GlobalSign
+
+**Responsibilities:**
+
+- Verifies identities before issuing certificates.
+
+- Signs certificates to vouch for their authenticity.
+
+**❌ Drawbacks / Limitations**
+**Symmetric Encryption:**
+
+- Key distribution is difficult and risky.
+
+- Not scalable for large networks (needs a unique key pair for each party).
+
+**Asymmetric Encryption:**
+
+- Slower and less efficient.
+
+- Larger key sizes required for strong security.
+
+**Certificates & CAs:**
+
+**Trust issues:** If a CA is compromised, trust in all its issued certificates is broken.
+
+**Revocation:** Hard to manage and check if a certificate is revoked (e.g., with CRL or OCSP).
+
+**Cost:** Some CAs charge for certificates.
+
+**Man-in-the-middle** risks if fake certificates are accepted.
+
+**The Three-Way Handshake** is a method used in TCP (Transmission Control Protocol) to establish a reliable connection between a client and a server before data is transmitted.
+
+## 🔁 Steps of the Three-Way Handshake
+**SYN (Synchronize) – Step 1**
+**Client → Server**
+
+- The client sends a SYN packet to the server.
+
+- It includes the client’s initial sequence number (ISN).
+
+**Purpose:** Request to start a connection and synchronize sequence numbers.
+
+**SYN-ACK (Synchronize-Acknowledge) – Step 2**
+**Server → Client**
+
+- The server responds with a SYN-ACK packet.
+
+- It includes the server's own ISN and acknowledges the client's SYN.
+
+**Purpose:** Acknowledge the client’s request and initiate its own connection setup.
+
+**ACK (Acknowledge) – Step 3**
+**Client → Server**
+
+- The client sends an ACK back to the server.
+
+- It confirms the receipt of the server's SYN.
+
+**Purpose:** Final acknowledgment to establish the connection.
+
+## 📶 After the Handshake
+The TCP connection is established, and data transmission can begin.
+
+## 🧠 Why is it Needed?
+Ensures both client and server agree to communicate.
+
+- Allows synchronization of sequence numbers for tracking data packets.
+
+- Prevents duplicate connections or malicious interference.
+
+**📉 Drawbacks / Limitations**
+- Takes time (three packets) before communication begins.
+
+- Vulnerable to SYN flood attacks (DoS attack exploiting Step 1 by sending many SYNs and never completing the handshake).
+
+- Design - It is a proven solution to common known problems.
+- Eg: Sidecar
+
+## What is a Design Pattern?
+- A design pattern is a reusable solution to a common problem in software design. Think of it as a blueprint or best practice that developers can follow to solve certain types of challenges.
+
+## 🌐 What is Istio?
+Istio is an open-source service mesh that provides a way to secure, connect, and observe microservices in a distributed application architecture—especially Kubernetes-based environments.
+
+- The Sidecar Pattern is a design pattern often used in cloud-native and microservices architectures—especially in Kubernetes—where a helper or utility container runs alongside your main application container in the same Pod.
+
+- **📦 In Simple Terms:**
+A sidecar is like an "add-on" that shares the same house (Pod) with your main app but handles extra duties—such as networking, logging, security, etc.
+
+- It has main buiseness logic which solves the problem.
+
+- Both the main container and the sidecar container:
+
+- Run in the same Kubernetes Pod.
+
+- Share the same network namespace (can talk via localhost).
+
+- Can share volumes, configs, etc.
+
+**When to Use Sidecars**
+- You want to add features without changing your app code.
+
+- You need cross-cutting concerns like logging, security, or routing.
+
+- You're using a service mesh like Istio, Linkerd, or Consul.
+
+
+# 4 things in K8s networking 
+1) How can two container talk to each other on the same pod - through localhost because they share the same network namespace.
+2) How can continers in two different pods talk to each other in the same node - custom bridge acts like a switch , handshake signal to all contains and container and through MAC adress
+3) How does two pods in different node talk to each other - custom bridge(CBR) it has default route which takes it to network plugin (calico , weeb), takes message from one machine to desired machine.CBR on other node forwards it to the desired container then.
+4) How can we talk to a service and service can do the load balancing 
+- kubelet sends the list of ip adress associated with the service pods known as endpoints to the api server and it writes them into etcd and gives to kube-proxy , later kubeproxy forwards the service request to one of the pod.
+
+- kubectl - client which talks to API server
+- Kubeadm - used for kubeadm init and join 
+- kubelet - small program which run seperately , allocate the sider range for each node 
+
+``` bash 
+https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/
+```
+## K8s RBAC
+```bash 
+https://github.com/vilasvarghese/docker-k8s/blob/master/yaml/rbac/instructions.txt
+```
+## Terraform provisioners
+``` bash 
+https://spacelift.io/blog/terraform-provisioners
+```
+## Storage volumes in K8s
+-> PV and PVC(what they are, why are they one-to-one) -> PVC is namespace based and PV is not -> PV is tightly bound to storage -> Static and dynamic provisioning
 
 
 
